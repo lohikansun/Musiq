@@ -57,7 +57,7 @@ As a user, I will be able to search for other users too see the groups they have
 | Order | int | The order the song is set to play in in it's group. |   |
 | Group | MusiQ Group | The MusiQ group that the song is set to play in. | "belongs_to": The track ID of the MusiQ representation of a song only belongs to 1 group. |
 
-## App interface
+## App Interface
 
 The public landing page of the application will have a brief yet detailed description of what MusiQ is and what a user can do with it so users who have not visited before may feel compelled to create an account. Users who *have* visited before but whose account information is no longer cached can log in directly from this landing page.
 
@@ -68,15 +68,22 @@ Each page in the app will have a menu bar at the top that will allow users to sw
 ## Experiments
 
 ###### Experiment 1 - OAuth and Spotify Search API
+* Source Code: [/spotifyExperiment/spot/](https://github.com/lohikansun/Musiq/tree/master/spotifyExperiment/spot)
+
 The first experiment was a test of using the Elixir wrapper spotify_ex for the Spotify API and implementing OAuth. The library was written by Jason Cummings and can be found at https://github.com/jsncmgs1/spotify_ex. A basic Phoenix web application was created and which demonstrates the ability to log in to an existing Spotify account using OAuth, and to then utilize the Spotify search feature.  Through this experiment we learned what the specifications of the Spotify API, most importantly that our users most have access to a Premium Spotify account, as many features of the API are not available to free accounts. This discovery made it clear that our app would have to be marketed only towards those with Premium accounts. We also learned the limitations of the spotify_ex library. While it does an excellent job and implementing OAuth and making API calls, it only provides us with a small subset of the Spotify API functionality. This discovery led us to conduct our second experiment, which involved extending the spotify_ex library in order to utilize the functionality we need in the Spotify API.
 
 ###### Experiment 2 - Pause and Play
+
+* Source Code: [/spotifyExperiment/extra/](https://github.com/lohikansun/Musiq/tree/master/spotifyExperiment/extra)
+* Forked Wrapper: [/spotifyExperiment/spotify_ex/](https://github.com/lohikansun/Musiq/tree/master/spotifyExperiment/spotify_ex)
+
 As mentioned in the previous experiment, the spotify_ex wrapper library does not provide us with everything we need out of the Spotify API. Most importantly, it does not allow us to control playback of music, which is clearly and integral part of MusiQ. To that end, this experiment consisted of an extension of the spotify_ex library. We forked the original wrapper from github and added access to missing endpoints and functions as needed, matching the style and structure of the original library as much as possible. For this experiment we tested the play and pause features of the API. Through this process we realized that Spotify does not allow the playing of their music through external audio players, meaning that all playback has to occur in an official Spotify application. For our application to work as intended, the user must have a separate Spotify application open. The play and pause commands tested in this application control the playback of music on the Spotify application the user has open.
 
 ###### Experiment 3 - React Drag and Drop
-For the front end of MusiQ, we decided to see if React would be useful in certain features like reordering the music queue. We set up a small elixir app with a react front end and found the react-dnd library to implement drag and drop.
+
+* Source Code: [/reactExperiment/](https://github.com/lohikansun/Musiq/tree/master/reactExperiment)
+
+For the front end of MusiQ, we decided to see if React would be useful in reordering the music queue. We want users to be able to be able to rearrange the order of the songs set to play next by dragging and dropping them. We set up a bare elixir app with a react front end and found the react-dnd library to implement drag and drop. We quickly learned that our version of babel requires installing extra plugins, like backwards compatibility support for decorators (`transform-decorators-legacy`). Once all the necessary plugins were installed to get react working in the browser with a sample project implementing drag and drop, we were able to create a miniature prototype of what the "Up Next" feed will look like. Since the state, and thus the ordering, of the songs is maintained entirely in the react front end and the server will need to know what songs to play next to play them, we now know that we'll be implementing web sockets to handle some of the updated state logic queues in each music group.
 
 ## Project Status
-With the OAuth, search, and pause and play implemented, a lot of the backend functions are completed. However, we still have to get our database set up, add users, support re-ordering, and implementing web sockets for the live updates. We've run into problems in noticing that the Elixir wrapper for the Spotify API does not contain every functionality so we have to write a few of our own. We also noticed that Spotify requires the web player to be open to play songs and for a user to have Spotify Premium to connect with it. Thus, we've changed our app to have to require these two things of users.
-
-maybe add more here.
+With the OAuth, search, and pause and play implemented, a lot of the backend functions are completed. However, we still have to get our database set up, add users, support re-ordering, and implementing web sockets for the live updates. We've run into problems in noticing that the Elixir wrapper for the Spotify API does not contain every functionality so we have to write a few of our own. We also noticed that Spotify requires the web player to be open to play songs and for a user to have Spotify Premium to connect with it. Thus, we've changed our app to have to require these two things of users. One other major change will be implementing the react front end to communicate with the server for telling Spotify which song to play next. The next steps for our application will be connecting the front end with the server via web sockets, adding our own database objects described above, and completing the frontend for all our app interfaces.

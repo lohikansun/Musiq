@@ -1,0 +1,13 @@
+MusiQ Design Document
+Overview
+User Stories
+Data Design
+- User
+- MusiQ group
+- Song
+App Interface
+Experiments
+- Experiment 1
+- Experiment 2
+- Experiment 3
+Project Status

@@ -1,0 +1,5 @@
+Experiments: https://github.com/lohikansun/Musiq
+- 1. https://github.com/lohikansun/Musiq/tree/master/spotifyExperiment/spot
+- 2. https://github.com/lohikansun/Musiq/tree/master/spotifyExperiment/extra
+- 3. https://github.com/lohikansun/Musiq/tree/master/reactExperiment
+Project: https://github.com/kimception/MusiQ

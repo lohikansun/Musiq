@@ -1,3 +1,4 @@
+// Base code from react-dnd example: http://react-dnd.github.io/react-dnd/examples-sortable-simple.html
 import React, { Component } from 'react'
 import update from 'immutability-helper'
 import { DragDropContext } from 'react-dnd'

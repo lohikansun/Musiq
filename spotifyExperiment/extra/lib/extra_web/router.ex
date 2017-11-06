@@ -19,9 +19,9 @@ defmodule ExtraWeb.Router do
     get "/", PageController, :index
     get "/authorize",  AuthorizationController, :authorize
     get "/authenticate", AuthenticationController, :authenticate
-    get "/search", SearchController, :index
-    post "/search", SearchController, :search
-    post "play", SearchController, :play
+    get "/player", PlayerController, :index
+    post "play", PlayerController, :play
+    post "pause", PlayerController, :pause
   end
 
   # Other scopes may use custom stacks.

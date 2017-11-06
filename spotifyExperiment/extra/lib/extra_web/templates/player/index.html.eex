@@ -1,0 +1,9 @@
+<h1> Player </h1>
+
+<%= form_tag "/play" do %>
+  <button type="submit">Play</button>
+  <% end %>
+
+  <%= form_tag "/pause" do %>
+    <button type="submit">Pause</button>
+    <% end %>

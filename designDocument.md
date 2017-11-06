@@ -30,8 +30,7 @@ As a user, I will be able to search for other users too see the groups they have
 | Name | Data Type |  Description |  Relationships |
 |---|---|---|---|
 | Spotify User ID | int | A user's Spotify User ID is the unique account ID key they're given upon creation of their Spotify account. |  |
-| User ID |  int | A user's user ID is the unique ID that is created when they first make an account on MusiQ. This user ID is unique and only shared with the MusiQ app. |  |
-| Username | string  | A user's username is the username they log in to Spotify with. The same username they use for Spotify will be the username they have for MusiQ. |   |
+| Username | string  | A user's username that they set when they first sign up with their Spotify account |   |
 | Email Address | string  | A user's email address is the email address they have connected to their Spotify account.  |   |
 | Admin? | boolean  | A boolean that indicates if the user is an admin user of MusiQ or not. |   |
 | Created Groups |  MusiQ Group | The groups that a user has created. | "has_many": A user can have 0 or more MusiQ Groups attached to their user account. If they have created a group, they will be linked to their account here.  |

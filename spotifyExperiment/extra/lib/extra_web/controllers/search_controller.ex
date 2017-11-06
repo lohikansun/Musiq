@@ -13,8 +13,9 @@ defmodule ExtraWeb.SearchController do
   end
 
   def play(conn, params) do
+    #Spotify.Follow.follow(conn, type: "artist", ids: "12")
     Spotify.Player.play(conn, params)
-    conn
+    render conn, "index.html", items: []
   end
 
 end

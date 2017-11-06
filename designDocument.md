@@ -15,7 +15,7 @@ As a person without an account or who is not logged in, I can look at the index 
 
 As a new user, I will be able to log in to MusiQ with my Spotify Premium account credentials. If I do not have a Spotify account, I will be able to create one to log in to MusiQ with from the main application. Once I'm logged in, I can join a pre-existing listening group by entering the name and creator of it or I can create one myself. Once I'm in a joint listening group, I can search for songs to add to the playlist, rearrange the songs in the playlist, pause or play the current song, and remove songs. I will only be able to listen to the song playing if I have my Spotify app or web player open since songs can only be streamed through Spotify's own application.
 
-As a user, I will be able to see what groups I've been a part of before. When I view my previously joined groups, I can re-join them to be access all features of the queue just as I had previously. If I did not create a group and it was deleted by it's creator, then I will not be able to see it in my list at all.
+As a user, I will be able to see what groups I've been a part of before. When I view my previously joined groups, I can re-join them to access all features of the queue just as I had previously. If I did not create a group and it was deleted by it's creator, then I will not be able to see it in my list at all.
 
 As a user who created a listening group, I will have the ability to edit the information about the group I created. I will be the only one who can rename the group's name and description or delete the group entirely. If I delete the group, all users who had joined it before will no longer be a part of it. I will be able to see it in my previously joined groups list, however, users who were in it will not.
 
@@ -30,7 +30,7 @@ As a user, I will be able to search for other users too see the groups they have
 | Name | Data Type |  Description |  Relationships |
 |---|---|---|---|
 | Spotify User ID | int | A user's Spotify User ID is the unique account ID key they're given upon creation of their Spotify account. |  |
-| Username | string  | A user's username that they set when they first sign up with their Spotify account |   |
+| Username | string  | A user's username that they set when they first sign up with their Spotify account. |   |
 | Email Address | string  | A user's email address is the email address they have connected to their Spotify account.  |   |
 | Admin? | boolean  | A boolean that indicates if the user is an admin user of MusiQ or not. |   |
 | Created Groups |  MusiQ Group | The groups that a user has created. | "has_many": A user can have 0 or more MusiQ Groups attached to their user account. If they have created a group, they will be linked to their account here.  |
@@ -68,10 +68,10 @@ Each page in the app will have a menu bar at the top that will allow users to sw
 ## Experiments
 
 ###### Experiment 1 - OAuth and Spotify Search API
-The first experiment was a test of using the Elixir wrapper for the Spotify API and implementing OAuth. A simple elixir app was created and ____. We learned ____. We'll change ___ .
+The first experiment was a test of using the Elixir wrapper spotify_ex for the Spotify API and implementing OAuth. The library was written by Jason Cummings and can be found at https://github.com/jsncmgs1/spotify_ex. A basic Phoenix web application was created and which demonstrates the ability to log in to an existing Spotify account using OAuth, and to then utilize the Spotify search feature.  Through this experiment we learned what the specifications of the Spotify API, most importantly that our users most have access to a Premium Spotify account, as many features of the API are not available to free accounts. This discovery made it clear that our app would have to be marketed only towards those with Premium accounts. We also learned the limitations of the spotify_ex library. While it does an excellent job and implementing OAuth and making API calls, it only provides us with a small subset of the Spotify API functionality. This discovery led us to conduct our second experiment, which involved extending the spotify_ex library in order to utilize the functionality we need in the Spotify API.
 
 ###### Experiment 2 - Pause and Play
-The Spotify API does not allow for songs to be played through an external player, so Spotify has to be open as an app or a web player for a user to listen to a song. For this experiment, ____ . We learned ___ . We'll change ___ .
+As mentioned in the previous experiment, the spotify_ex wrapper library does not provide us with everything we need out of the Spotify API. Most importantly, it does not allow us to control playback of music, which is clearly and integral part of MusiQ. To that end, this experiment consisted of an extension of the spotify_ex library. We forked the original wrapper from github and added access to missing endpoints and functions as needed, matching the style and structure of the original library as much as possible. For this experiment we tested the play and pause features of the API. Through this process we realized that Spotify does not allow the playing of their music through external audio players, meaning that all playback has to occur in an official Spotify application. For our application to work as intended, the user must have a separate Spotify application open. The play and pause commands tested in this application control the playback of music on the Spotify application the user has open.
 
 ###### Experiment 3 - React Drag and Drop
 For the front end of MusiQ, we decided to see if React would be useful in certain features like reordering the music queue. We set up a small elixir app with a react front end and found the react-dnd library to implement drag and drop.

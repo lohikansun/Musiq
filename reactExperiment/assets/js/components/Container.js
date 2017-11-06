@@ -13,6 +13,7 @@ const style = {
 export default class Container extends Component {
     constructor(props) {
         super(props)
+        this.state = this.props.state;
         this.moveCard = this.moveCard.bind(this)
         this.state = {
             cards: [
@@ -64,7 +65,7 @@ export default class Container extends Component {
 
     render() {
         const { cards } = this.state
-
+        console.log(this.state)
         return (
             <div style={style}>
                 {cards.map((card, i) => (

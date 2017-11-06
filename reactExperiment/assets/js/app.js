@@ -24,9 +24,21 @@ import ReactDOM from 'react-dom';
 
 import SortableSimple from './components/index';
 
+function ready(channel, state0) {
+    let root = document.getElementById('root');
+    ReactDOM.render(<SortableSimple channel={channel} state={state0} />, root);
+}
+
+
 function start() {
-  let root = document.getElementById('root');
-  ReactDOM.render(<SortableSimple />, root);
+
+  let channel = socket.channel("group: " + window.user_name, {})
+  channel.join()
+    .receive("ok", state0 => {
+        console.log("Joined successfully", state0)
+        ready(channel, state0)
+    })
+    .receive("error", resp => { console.log("Unable to join", resp) })
 }
 
 $(start);
